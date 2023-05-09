@@ -101,7 +101,7 @@
               },
               template: `
                 <template v-for="(item, index) in tree" :key="index">
-                  <li class="relative rounded-md hover:(bg-blue-600/20) focus-within:(bg-blue-600/20)">
+                  <li class="relative rounded-md bg-blue-600/20(hover:& focus-within:&)">
                     <a href="#" class="peer py-1 px-3 flex items-center gap-2 rounded-md motion-safe:(transition) hover:(bg-blue-600 text-blue-50) focus:(bg-blue-600 text-blue-50)">
                       <span>{{ item.title }}</span>
                       <iconify-icon v-if="item.children" :rotate="vertical ? '45' : ''" icon="mdi:chevron-right" inline="false" class="iconify ml-auto"></iconify-icon>
