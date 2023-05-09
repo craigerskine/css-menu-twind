@@ -91,13 +91,8 @@
           'nav-list',
             {
               props: {
-                horizontal: {
-                  type: Boolean,
-                },
-                tree: {
-                  type: Array,
-                  default: () => []
-                }
+                horizontal: { type: Boolean },
+                tree: { type: Array, default: () => [] }
               },
               template: `
                 <template v-for="(item, index) in tree" :key="index">
@@ -132,14 +127,14 @@
         btn.addEventListener('click', toggleColorMode);
       });
 
-      // twind
+      // twind init
       install({
         presets: [presetAutoprefix(), presetTailwind()],
         darkMode: 'class',
         darkColor: autoDarkColor,
         hash: false,
       });
-      // global css
+      // twind global
       injectGlobal`
         @layer base {
           body { @apply !block; }
