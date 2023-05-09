@@ -1,4 +1,4 @@
-# [css-menu-twind](craigerskine.github.io/css-menu-twind/)
+# [css-menu-twind](https://craigerskine.github.io/css-menu-twind/)
 Built with Twind/Tailwind and Vue
 
 * Unlimited levels
