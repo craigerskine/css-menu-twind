@@ -38,7 +38,7 @@
         <nav>
           <h2>Horizontal</h2>
           <ul class="flex gap-1">
-            <nav-list vertical :tree="nav" />
+            <nav-list horizontal :tree="nav" />
           </ul>
         </nav>
 
@@ -91,7 +91,7 @@
           'nav-list',
             {
               props: {
-                vertical: {
+                horizontal: {
                   type: Boolean,
                 },
                 tree: {
@@ -104,9 +104,9 @@
                   <li class="relative rounded-md bg-blue-600/20(hover:& focus-within:&)">
                     <a href="#" class="peer py-1 px-3 flex items-center gap-2">
                       <span>{{ item.title }}</span>
-                      <iconify-icon v-if="item.children" :rotate="vertical ? '45' : ''" icon="mdi:chevron-right" inline="false" class="iconify ml-auto"></iconify-icon>
+                      <iconify-icon v-if="item.children" :rotate="horizontal ? '45' : ''" icon="mdi:chevron-right" inline="false" class="iconify ml-auto"></iconify-icon>
                     </a>
-                    <ul v-if="item.children" :class="[vertical ? 'top-full left-0' : 'top-0 left-full', 'p-2 w-48 bg-gray-100 absolute opacity-0 rounded-md shadow-lg ring-(1 inset gray-900/10) transform scale-0 motion-safe:(transition) hover:(opacity-100 scale-100) focus-within:(opacity-100 scale-100) peer-hover:(opacity-100 scale-100) peer-focus:(opacity-100 scale-100)']">
+                    <ul v-if="item.children" :class="[horizontal ? 'top-full left-0' : 'top-0 left-full', 'p-2 w-48 bg-gray-100 absolute opacity-0 rounded-md shadow-lg ring-(1 inset gray-900/10) transform scale-0 motion-safe:(transition) hover:(opacity-100 scale-100) focus-within:(opacity-100 scale-100) peer-hover:(opacity-100 scale-100) peer-focus:(opacity-100 scale-100)']">
                       <nav-list :tree="item.children" />
                     </ul>
                   </li>
