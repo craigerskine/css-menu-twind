@@ -27,19 +27,21 @@
           <span class="hidden dark:(block)"><iconify-icon icon="mdi:weather-night" inline="false" class="iconify"></iconify-icon> <span class="sr-only">Switch to light mode</span></span>
         </button>
       </header>
-      <main class="w-full flex-(& 1 col) items-center justify-center gap-32">
+      <main class="w-full flex-(& 1 col) items-center justify-center gap-16 lg:(gap-32)">
+
+        <!-- *** HORIZONTAL *** -->
+        <nav>
+          <h2>Horizontal</h2>
+          <ul class="flex gap-1">
+            <nav-list vertical :tree="nav" />
+          </ul>
+        </nav>
 
         <!-- *** VERICAL *** -->
         <nav>
+          <h2>Vertical</h2>
           <ul class="w-48 space-y-1">
             <nav-list :tree="nav" />
-          </ul>
-        </nav>
-        
-        <!-- *** HORIZONTAL *** -->
-        <nav>
-          <ul class="flex gap-1">
-            <nav-list vertical :tree="nav" />
           </ul>
         </nav>
 
@@ -99,7 +101,7 @@
                       <span>{{ item.title }}</span>
                       <iconify-icon v-if="item.children" :rotate="vertical ? '45' : ''" icon="mdi:chevron-right" inline="false" class="iconify ml-auto"></iconify-icon>
                     </a>
-                    <ul v-if="item.children" :class="[vertical ? 'top-full left-0' : 'top-0 left-full', 'p-2 w-48 bg-gray-100 absolute opacity-0 rounded-md shadow-lg transform scale-0 motion-safe:(transition) hover:(opacity-100 scale-100) focus-within:(opacity-100 scale-100) peer-hover:(opacity-100 scale-100) peer-focus:(opacity-100 scale-100)']">
+                    <ul v-if="item.children" :class="[vertical ? 'top-full left-0' : 'top-0 left-full', 'p-2 w-48 bg-gray-100 absolute opacity-0 rounded-md shadow-lg ring-(1 inset gray-900/10) transform scale-0 motion-safe:(transition) hover:(opacity-100 scale-100) focus-within:(opacity-100 scale-100) peer-hover:(opacity-100 scale-100) peer-focus:(opacity-100 scale-100)']">
                       <nav-list :tree="item.children" />
                     </ul>
                   </li>
@@ -136,6 +138,7 @@
       injectGlobal`
         @layer base {
           body { @apply !block; }
+          h2 { @apply mb-6 px-3 text-(xs gray-400) font-bold uppercase flex items-center gap-3 before:(w-6 h-1 bg-current opacity-10 content-['']) after:(h-1 bg-current flex-1 opacity-10 content-['']); }
           [v-cloak] { @apply hidden; }
         }
       `
