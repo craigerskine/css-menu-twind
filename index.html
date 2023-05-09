@@ -22,10 +22,15 @@
     <div id="app" class="min-h-screen flex-(& col)" v-cloak>
       <header class="mb-6 border-(b gray-500/10) p-4 w-full">
         <h1 class="pb-6 text-(center lg:([calc(2.5vw)])) font-black">Pure CSS Menu <small class="block font-normal opacity-50">built with Twind/Tailwind</small></h1>
-        <button class="color-mode mx-auto w-8 h-8 bg-gray-700/10 text-xl flex items-center justify-center rounded-full motion-safe:(transition) hover:(text-blue-500)" aria-label="Toggle color mode">
-          <span class="block dark:(hidden)"><iconify-icon icon="mdi:weather-sunny" inline="false" class="iconify"></iconify-icon> <span class="sr-only">Switch to dark mode</span></span>
-          <span class="hidden dark:(block)"><iconify-icon icon="mdi:weather-night" inline="false" class="iconify"></iconify-icon> <span class="sr-only">Switch to light mode</span></span>
-        </button>
+        <nav class="flex items-center justify-center gap-4">
+          <button class="color-mode w-8 h-8 bg-gray-700/10 text-xl flex items-center justify-center rounded-full motion-safe:(transition) hover:(text-blue-500)" aria-label="Toggle color mode">
+            <span class="block dark:(hidden)"><iconify-icon icon="mdi:weather-sunny" inline="false" class="iconify"></iconify-icon> <span class="sr-only">Switch to dark mode</span></span>
+            <span class="hidden dark:(block)"><iconify-icon icon="mdi:weather-night" inline="false" class="iconify"></iconify-icon> <span class="sr-only">Switch to light mode</span></span>
+          </button>
+          <a href="https://github.com/craigerskine/css-menu-twind" class="motion-safe:(transition) hover:(text-blue-500)">
+            <iconify-icon icon="mdi:github" inline="false" class="iconify text-3xl"></iconify-icon>
+          </a>
+        </nav>
       </header>
       <main class="w-full flex-(& 1 col) items-center justify-center gap-16 lg:(gap-32)">
 
