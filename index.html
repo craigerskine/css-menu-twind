@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <title>Tailwind CSS Menu</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="https://fonts.gstatic.com" rel="preconnect" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet" />
+
+    <script>
+      // color mode init
+      if (localStorage.getItem('color-mode') === 'dark' || (window.matchMedia('(prefers-color-scheme: dark)').matches && !localStorage.getItem('color-mode'))) {
+        document.documentElement.classList.add('dark');
+      }
+    </script>
+
+  </head>
+
+  <body class="bg-gray-50 text-gray-600" style="display: none;">
+    <div id="app" class="min-h-screen flex-(& col)" v-cloak>
+      <header class="mb-6 border-(b gray-500/10) p-4 w-full">
+        <h1 class="pb-6 text-(center lg:([calc(2.5vw)])) font-black">Pure CSS Menu <small class="block font-normal opacity-50">built with Twind/Tailwind</small></h1>
+        <button class="color-mode mx-auto w-8 h-8 bg-gray-700/10 text-xl flex items-center justify-center rounded-full motion-safe:(transition) hover:(text-blue-500)" aria-label="Toggle color mode">
+          <span class="block dark:(hidden)"><iconify-icon icon="mdi:weather-sunny" inline="false" class="iconify"></iconify-icon> <span class="sr-only">Switch to dark mode</span></span>
+          <span class="hidden dark:(block)"><iconify-icon icon="mdi:weather-night" inline="false" class="iconify"></iconify-icon> <span class="sr-only">Switch to light mode</span></span>
+        </button>
+      </header>
+      <main class="w-full flex-(& 1 col) items-center justify-center gap-32">
+
+        <!-- *** VERICAL *** -->
+        <nav>
+          <ul class="w-48 space-y-1">
+            <nav-list :tree="nav" />
+          </ul>
+        </nav>
+        
+        <!-- *** HORIZONTAL *** -->
+        <nav>
+          <ul class="flex gap-1">
+            <nav-list vertical :tree="nav" />
+          </ul>
+        </nav>
+
+      </main>
+      <footer class="w-full"></footer>
+    </div>
+    <script type="module">
+      import 'https://esm.run/iconify-icon';
+      import { install, injectGlobal, autoDarkColor } from 'https://esm.run/@twind/core';
+      import presetAutoprefix from 'https://esm.run/@twind/preset-autoprefix';
+      import presetTailwind from 'https://esm.run/@twind/preset-tailwind';
+      import { createApp } from 'https://esm.run/vue@3/dist/vue.esm-browser.js'
+
+      // vue
+      const app = createApp({
+        data() {
+          return {
+            nav: [
+              { title: 'Main nav', },
+              {
+                title: 'Main nav',
+                children: [
+                  { title: 'Secondary nav', },
+                  {
+                    title: 'Secondary nav',
+                    children: [
+                      { title: 'Tertiary nav', },
+                      { title: 'Tertiary nav', },
+                      { title: 'Tertiary nav', },
+                    ],
+                  },
+                  { title: 'Secondary nav', },
+                ],
+              },
+              { title: 'Main nav', },
+            ],
+          }
+        }
+      })
+      app
+        .component(
+          'nav-list',
+            {
+              props: {
+                vertical: {
+                  type: Boolean,
+                },
+                tree: {
+                  type: Array,
+                  default: () => []
+                }
+              },
+              template: `
+                <template v-for="(item, index) in tree" :key="index">
+                  <li class="relative rounded-md hover:(bg-blue-600/20) focus-within:(bg-blue-600/20)">
+                    <a href="#" class="peer py-1 px-3 flex items-center gap-2 rounded-md motion-safe:(transition) hover:(bg-blue-600 text-blue-50) focus:(bg-blue-600 text-blue-50)">
+                      <span>{{ item.title }}</span>
+                      <iconify-icon v-if="item.children" :rotate="vertical ? '45' : ''" icon="mdi:chevron-right" inline="false" class="iconify ml-auto"></iconify-icon>
+                    </a>
+                    <ul v-if="item.children" :class="[vertical ? 'top-full left-0' : 'top-0 left-full', 'p-2 w-48 bg-gray-100 absolute opacity-0 rounded-md shadow-lg transform scale-0 motion-safe:(transition) hover:(opacity-100 scale-100) focus-within:(opacity-100 scale-100) peer-hover:(opacity-100 scale-100) peer-focus:(opacity-100 scale-100)']">
+                      <nav-list :tree="item.children" />
+                    </ul>
+                  </li>
+                </template>
+              `,
+            },
+        )
+        .mount('#app')
+
+      // color mode
+      const toggleColorMode = function() {
+        // light
+        if (document.documentElement.classList.contains('dark')) {
+          document.documentElement.classList.remove('dark');
+          localStorage.setItem('color-mode', 'light')
+          return;
+        }
+        // dark
+        document.documentElement.classList.add('dark');
+        localStorage.setItem('color-mode', 'dark');
+      };
+      document.querySelectorAll('.color-mode').forEach(btn => {
+        btn.addEventListener('click', toggleColorMode);
+      });
+
+      // twind
+      install({
+        presets: [presetAutoprefix(), presetTailwind()],
+        darkMode: 'class',
+        darkColor: autoDarkColor,
+        hash: false,
+      });
+      // global css
+      injectGlobal`
+        @layer base {
+          body { @apply !block; }
+          [v-cloak] { @apply hidden; }
+        }
+      `
+    </script>
+  </body>
+
+</html>
