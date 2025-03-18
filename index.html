@@ -32,7 +32,7 @@
           </a>
         </nav>
       </header>
-      <main class="w-full flex-(& 1 col) items-center justify-center gap-16 lg:(gap-32)">
+      <main class="w-full flex-(& 1 col) items-center justify-center gap-16 lg:(gap-32) [&>nav]:(w-full max-w-xs) [&_h2]:(mb-6 px-3 text-(xs gray-400) font-bold uppercase flex items-center gap-3 before:(w-6 h-1 bg-current opacity-10 content-['']) after:(h-1 bg-current flex-1 opacity-10 content-['']))">
 
         <!-- *** HORIZONTAL *** -->
         <nav>
@@ -45,7 +45,7 @@
         <!-- *** VERICAL *** -->
         <nav>
           <h2>Vertical</h2>
-          <ul class="w-48 space-y-1">
+          <ul>
             <nav-list :tree="nav" />
           </ul>
         </nav>
@@ -138,7 +138,6 @@
       injectGlobal`
         @layer base {
           body { @apply !block; }
-          h2 { @apply mb-6 px-3 text-(xs gray-400) font-bold uppercase flex items-center gap-3 before:(w-6 h-1 bg-current opacity-10 content-['']) after:(h-1 bg-current flex-1 opacity-10 content-['']); }
           [v-cloak] { @apply hidden; }
         }
       `
